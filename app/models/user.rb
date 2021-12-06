@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
 end
