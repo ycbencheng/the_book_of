@@ -12,4 +12,15 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   has_one_attached :image, dependent: :destroy
+
+  has_many :friendships, class_name: 'Friendship', dependent: :destroy
+
+  def friends
+    accepted = friendships.where(status: :accepted).pluck(:friend_id)
+    User.where(id: accepted)
+  end
+
+  def invite(friend)
+    friendship.create(friend_id: friend.id)
+  end
 end

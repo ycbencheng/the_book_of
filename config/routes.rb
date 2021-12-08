@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     post '/users/sign_up', to: 'users/registrations#create'
   end
 
+  post '/add_friends', to: 'home#add_friends'
+
   get '/home', to: 'home#index'
 end
