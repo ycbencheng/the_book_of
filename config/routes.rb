@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     delete '/users/sign_out', to: 'users/sessions#destroy'
     post '/users/sign_up', to: 'users/registrations#create'
   end
+
+  get '/home', to: 'home#index'
 end
