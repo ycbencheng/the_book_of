@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomesController < ApplicationController
   def index
     friends = current_user.friends
 
@@ -10,9 +10,7 @@ class HomeController < ApplicationController
 
     friend = User.find_by(email: email) if current_user.email != email
 
-    if friend
-      current_user.invite(friend)
-
+    if current_user.invite(friend)
       render json: { status: :success }
     else
       render json: { status: :failed }
