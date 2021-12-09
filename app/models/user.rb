@@ -21,6 +21,7 @@ class User < ApplicationRecord
   end
 
   def invite(friend)
-    friendship.create(friend_id: friend.id)
+    friendship = friendships.find_or_create_by(friend_id: friend.id)
+    friendship.update(status: :pending)
   end
 end
