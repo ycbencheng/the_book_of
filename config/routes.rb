@@ -9,4 +9,9 @@ Rails.application.routes.draw do
     delete '/users/sign_out', to: 'users/sessions#destroy'
     post '/users/sign_up', to: 'users/registrations#create'
   end
+
+  post '/add_friends', to: 'home#add_friends'
+  delete '/delete_friends', to: 'home#delete_friends'
+
+  get '/home', to: 'home#index'
 end
