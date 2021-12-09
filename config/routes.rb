@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   post '/add_friends', to: 'home#add_friends'
+  delete '/delete_friends', to: 'home#delete_friends'
 
   get '/home', to: 'home#index'
 end

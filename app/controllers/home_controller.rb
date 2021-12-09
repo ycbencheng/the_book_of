@@ -19,9 +19,19 @@ class HomeController < ApplicationController
     end
   end
 
+  def delete_friends
+    friendship = current_user.friendships.find_by(friend_id: friend_params[:id])
+
+    if friendship.destroy
+      render json: { status: :success }
+    else
+      render json: { status: :failed }
+    end
+  end
+
   private
 
   def friend_params
-    params.require(:home).permit(:email)
+    params.require(:home).permit(:id, :email)
   end
 end
