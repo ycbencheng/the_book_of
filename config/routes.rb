@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   put '/update_entry', to: 'entries#update'
   delete '/delete_entry', to: 'entries#destroy'
 
-  post '/add_friends', to: 'homes#add_friends'
-  delete '/delete_friends', to: 'homes#delete_friends'
 
-  get '/home', to: 'homes#index'
+  get '/friends', to: 'friends#index'
+  post '/add_friends', to: 'friends#create'
+  delete '/delete_friends', to: 'friends#destroy'
 end
