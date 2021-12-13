@@ -1,25 +1,23 @@
-class HomeController < ApplicationController
+class FriendsController < ApplicationController
   def index
     friends = current_user.friends
 
-    render json: { user: current_user, friends: friends, status: :success }
+    render json: { friends: friends, status: :success }
   end
 
-  def add_friends
+  def create
     email = friend_params[:email]
 
     friend = User.find_by(email: email) if current_user.email != email
 
-    if friend
-      current_user.invite(friend)
-
+    if current_user.invite(friend)
       render json: { status: :success }
     else
       render json: { status: :failed }
     end
   end
 
-  def delete_friends
+  def destroy
     friendship = current_user.friendships.find_by(friend_id: friend_params[:id])
 
     if friendship.destroy

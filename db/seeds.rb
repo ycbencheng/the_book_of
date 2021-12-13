@@ -7,12 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(first_name: 'Ben',
+user_1 = User.create!(first_name: 'Ben',
             last_name: 'Cheng',
             email: 'bcyc2004@gmail.com',
             password: 'password')
 
-User.create!(first_name: 'Meagan',
+user_2 = User.create!(first_name: 'Meagan',
             last_name: 'Cheng',
             email: 'meagan@gmail.com',
             password: 'password')
+
+Friendship.create!(user_id: User.first.id, friend_id: User.last.id, status: 1)
+
+(1...30).map do |num|
+  if num.even?
+    Entry.create!(user_id: User.first.id, body: "Entry on date #{Date.today - num}", created_at: Date.today - num)
+  elsif num.odd?
+    Entry.create!(user_id: User.last.id, body: "Entry on date #{Date.today - num}", created_at: Date.today - num)
+  end
+end

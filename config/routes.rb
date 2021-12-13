@@ -10,8 +10,13 @@ Rails.application.routes.draw do
     post '/users/sign_up', to: 'users/registrations#create'
   end
 
-  post '/add_friends', to: 'home#add_friends'
-  delete '/delete_friends', to: 'home#delete_friends'
+  get '/entries', to: 'entries#index'
+  post '/create_entry', to: 'entries#create'
+  put '/update_entry', to: 'entries#update'
+  delete '/delete_entry', to: 'entries#destroy'
 
-  get '/home', to: 'home#index'
+
+  get '/friends', to: 'friends#index'
+  post '/add_friends', to: 'friends#create'
+  delete '/delete_friends', to: 'friends#destroy'
 end
