@@ -40,6 +40,10 @@ class EntriesController < ApplicationController
   end
 
   def list_of_entries
-    Entry.where(user_id: current_user.id).order(:created_at)
+    Entry.where(user_id: current_user.id).order(created_at: :desc).map do |entry|
+      { id: entry.id,
+        body: entry.body,
+        created_at: entry.created_at.strftime("%m/%d/%Y")}
+    end
   end
 end
