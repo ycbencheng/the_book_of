@@ -5,12 +5,13 @@ class FriendsController < ApplicationController
     render json: { friends: friends, status: :success }
   end
 
+
   def create
     email = friend_params[:email]
 
     friend = User.find_by(email: email) if current_user.email != email
 
-    if current_user.invite(friend)
+    if friend
       render json: { status: :success }
     else
       render json: { status: :failed }
@@ -30,6 +31,6 @@ class FriendsController < ApplicationController
   private
 
   def friend_params
-    params.require(:home).permit(:id, :email)
+    params.require(:friend).permit(:id, :email)
   end
 end
