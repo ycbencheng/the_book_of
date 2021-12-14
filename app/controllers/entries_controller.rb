@@ -1,13 +1,13 @@
 class EntriesController < ApplicationController
   def index
-    render json: { entries: list_of_entries(params['user_id']), status: :success }
+    render json: { user: User.find(params['user_id']), entries: list_of_entries(params['user_id']), status: :success }
   end
 
   def create
     entry = current_user.entries.create(body: entry_params[:body])
 
     if entry.save
-      render json: { entries: list_of_entries(current_user.id), status: :success }
+      render json: { user: current_user, entries: list_of_entries(current_user.id), status: :success }
     else
       render json: { status: :failed }
     end
@@ -40,6 +40,8 @@ class EntriesController < ApplicationController
   end
 
   def list_of_entries(user_id)
+    user_id = user_id.nil? ? current_user.id : user_id
+
     Entry.where(user_id: user_id).order(created_at: :desc).map do |entry|
       { id: entry.id,
         body: entry.body,
