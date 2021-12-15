@@ -45,7 +45,7 @@ class EntriesController < ApplicationController
     Entry.where(user_id: user_id).order(created_at: :desc).map do |entry|
       { id: entry.id,
         body: entry.body,
-        created_at: entry.created_at.strftime("%m/%d/%Y")}
+        created_at: entry.created_at.in_time_zone('MST').strftime("%m/%d/%Y")}
     end
   end
 end
