@@ -11,7 +11,7 @@ class FriendsController < ApplicationController
 
     friend = User.find_by(email: email) if current_user.email != email
 
-    if friend
+    if current_user.invite(friend)
       render json: { status: :success }
     else
       render json: { status: :failed }
