@@ -29,4 +29,11 @@ class User < ApplicationRecord
   def friends_with(user)
     friendships.find_by(friend_id: user)
   end
+
+  def info
+    last_entried_at = { last_entried_at: entries.order(created_at: :desc)
+                                         .first
+                                         .created_at }.as_json
+    as_json.merge(last_entried_at)
+  end
 end

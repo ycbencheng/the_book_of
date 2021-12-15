@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    render json: { user: current_user, status: :success }
+    render json: { user: current_user.info, status: :success }
   end
 
   def update

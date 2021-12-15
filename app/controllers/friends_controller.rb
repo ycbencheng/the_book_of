@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
   def index
-    friends = current_user.friends
+    friends = current_user.friends.map(&:info)
 
     render json: { friends: friends, status: :success }
   end
@@ -11,7 +11,7 @@ class FriendsController < ApplicationController
 
     friend = User.find_by(email: email) if current_user.email != email
 
-    if friend
+    if current_user.invite(friend)
       render json: { status: :success }
     else
       render json: { status: :failed }
