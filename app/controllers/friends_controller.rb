@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
   def index
-    friends = current_user.friends
+    friends = current_user.friends.map(&:info)
 
     render json: { friends: friends, status: :success }
   end

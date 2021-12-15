@@ -1,13 +1,14 @@
 class EntriesController < ApplicationController
   def index
-    render json: { user: User.find(params['user_id']), entries: list_of_entries(params['user_id']), status: :success }
+    user = User.find(params['user_id'])
+    render json: { user: user.info, entries: list_of_entries(params['user_id']), status: :success }
   end
 
   def create
     entry = current_user.entries.create(body: entry_params[:body])
 
     if entry.save
-      render json: { user: current_user, entries: list_of_entries(current_user.id), status: :success }
+      render json: { user: current_user.info, entries: list_of_entries(current_user.id), status: :success }
     else
       render json: { status: :failed }
     end
